@@ -1,0 +1,26 @@
+MySQL Challenge 2 Aggregations no-7/8
+http://localhost:8888/edit/1Ironhack/data-ber-03-20-master-branch/Labs/module-1_labs/03_mysql/03_lab-sql-aggregations/lab-2-sql-aggregations-solutions.md
+
+Issue:
+I cant define new row names unless they are put in quotation marks:
+
+my solution:
+
+  SELECT account_id,
+       FLOOR(SUM(IF(type = 'PRIJEM', amount, 0))) AS "incoming amount",
+       FLOOR(SUM(IF(type = 'VYDAJ', amount, 0))) AS "outgoing amount",
+       FLOOR(SUM(IF(type = 'PRIJEM', amount,0))) - FLOOR(SUM(IF(type = 'VYDAJ', amount,0))) AS "difference"
+FROM trans
+WHERE account_id= 396
+GROUP BY 1;
+
+solution given by IH:
+
+SELECT
+    account_id,
+    FLOOR(SUM(IF(type = 'PRIJEM', amount, 0))) AS incoming_amount,
+    FLOOR(SUM(IF(type = 'VYDAJ', amount, 0))) AS outgoing_amount,
+    FLOOR(SUM(IF(type = 'PRIJEM', amount, 0))) - FLOOR(SUM(IF(type = 'VYDAJ', amount, 0))) AS difference
+FROM trans
+WHERE account_id = 396
+GROUP BY 1;
